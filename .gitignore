@@ -16,3 +16,6 @@ bin-int/
 *.exp
 *.lib
 *.dll
+
+# 工具安装包
+premake-5.0.0-windows.zip
