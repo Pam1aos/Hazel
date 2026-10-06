@@ -9,6 +9,10 @@ extern Hazel::Application* Hazel::CreateApplication();
 
 int main(int argc, char** argv)
 {
+	Hazel::Log::Init();
+	Hazel::Log::GetCoreLogger()->info("Initialized Log!");
+	Hazel::Log::GetClientLogger()->info("Initialized Log!");	
+
 	printf("Hazel Engine\n");
 	auto app = Hazel::CreateApplication();
 	app->Run();
