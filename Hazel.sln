@@ -5,7 +5,7 @@ VisualStudioVersion = 17.14.37710.0 d17.14
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sandbox", "Sandbox\Sandbox.vcxproj", "{0275C8EC-7F02-46A0-B6EF-81F0B891F15D}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Hazel", "Hazel.vcxproj", "{64D43FBD-E1E9-40E9-9A1F-C4A8320D86A6}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Hazel", "Hazel\Hazel.vcxproj", "{64D43FBD-E1E9-40E9-9A1F-C4A8320D86A6}"
 EndProject
 
 Global
