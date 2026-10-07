@@ -1,8 +1,11 @@
 #pragma once
 
 #include <memory>	
+
 #include "spdlog/spdlog.h"
 #include "Core.h"
+#include "spdlog/fmt/ostr.h"
+
 namespace Hazel {
 #pragma warning(push)
 #pragma warning(disable: 4251)
