@@ -12,9 +12,12 @@ outputdir = "%{cfg.buildcfg}-%{cfg.system}-%{cfg.architecture}"
 
 IncludeDir = {}
 IncludeDir["GLFW"] = "Hazel/vendor/GLFW/include"
+IncludeDir["Glad"] = "Hazel/vendor/Glad/include"
+IncludeDir["ImGui"] = "Hazel/vendor/ImGui"
 
 include "Hazel/vendor/GLFW"
-
+include "Hazel/vendor/Glad"
+include "Hazel/vendor/ImGui"
 
 project "Hazel"
 	location "Hazel"
@@ -32,16 +35,22 @@ project "Hazel"
 		"%{prj.name}/src/**.h",
 		"%{prj.name}/src/**.cpp"
 	}
+
 	includedirs
 	{
 		"%{prj.name}/src",
 		"%{prj.name}/vendor/spdlog/include",
-		"%{IncludeDir.GLFW}"
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.ImGui}/backends"
 	}
 
 	links
 	{
 		"GLFW",
+		"GLAD",
+		"ImGui",
 		"opengl32.lib"
 	}
 
@@ -53,6 +62,7 @@ project "Hazel"
 		defines{
 			"HZ_PLATFORM_WINDOWS",
 			"HZ_BUILD_DLL",
+			"GLFW_INCLUDE_NONE",
 			"_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING"
 		}
 
