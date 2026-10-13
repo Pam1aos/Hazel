@@ -19,3 +19,6 @@ bin-int/
 
 # 工具安装包
 premake-5.0.0-windows.zip
+
+# ImGui runtime config
+imgui.ini
