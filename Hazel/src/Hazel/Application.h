@@ -1,6 +1,7 @@
 #pragma once
 #include "Core.h"
 #include "Window.h"
+#include "Input.h"
 
 #include "Hazel/Events/Event.h"
 #include "Hazel/Events/ApplicationEvent.h"
