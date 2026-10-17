@@ -37,6 +37,16 @@ namespace Hazel {
 		ImGuiIO& io = ImGui::GetIO();
 		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
 		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;     // 启用停靠
+		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;   // 启用视口（多窗口）
+
+		// 启用视口时调整 WindowRounding / WindowBg，让平台窗口和普通窗口外观一致
+		ImGuiStyle& style = ImGui::GetStyle();
+		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+		{
+			style.WindowRounding = 0.0f;
+			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
+		}
 
 
 		// ����ӳ��
