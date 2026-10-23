@@ -37,10 +37,10 @@ namespace Hazel {
 		ImGuiIO& io = ImGui::GetIO();
 		io.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
 		io.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
-		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;     // 启用停靠
-		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;   // 启用视口（多窗口）
+		io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;     // Enable docking
+		io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;   // Enable multi-viewports
 
-		// 启用视口时调整 WindowRounding / WindowBg，让平台窗口和普通窗口外观一致
+		// Make platform windows look consistent with regular windows when viewports are enabled
 		ImGuiStyle& style = ImGui::GetStyle();
 		if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 		{
@@ -48,8 +48,7 @@ namespace Hazel {
 			style.Colors[ImGuiCol_WindowBg].w = 1.0f;
 		}
 
-
-		// ����ӳ��
+		// Keyboard mapping
 		IMGUI_MAP_KEY(ImGuiKey_Tab, GLFW_KEY_TAB);
 		IMGUI_MAP_KEY(ImGuiKey_LeftArrow, GLFW_KEY_LEFT);
 		IMGUI_MAP_KEY(ImGuiKey_RightArrow, GLFW_KEY_RIGHT);
@@ -88,7 +87,7 @@ namespace Hazel {
 		Application&app = Application::Get();
 
 
-		io.DisplaySize = ImVec2(app.GetWindow().GetWidth(), app.GetWindow().GetHeight());
+		io.DisplaySize = ImVec2((float)app.GetWindow().GetWidth(), (float)app.GetWindow().GetHeight());
 
 		
 		float time = (float)glfwGetTime();

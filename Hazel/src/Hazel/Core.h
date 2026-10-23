@@ -1,13 +1,10 @@
 #pragma once
 
 #ifdef HZ_PLATFORM_WINDOWS
-	#ifdef HZ_BUILD_DLL
-		#define HAZEL_API __declspec(dllexport)
-	#else
-		#define HAZEL_API __declspec(dllimport)
-        #endif
+	// Hazel is built as a static library, so no DLL import/export is required
+	#define HAZEL_API
 #else
-        #error Hazel only supports Windows!	
+        #error Hazel only supports Windows!
 #endif
 
 #ifdef HZ_ENABLE_ASSERTS

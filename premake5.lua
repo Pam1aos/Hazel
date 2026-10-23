@@ -22,7 +22,7 @@ include "Hazel/vendor/ImGui"
 
 project "Hazel"
 	location "Hazel"
-	kind "SharedLib"
+	kind "StaticLib"
 	language "C++"
 
 	targetdir ("bin/" .. outputdir .. "/%{prj.name}")
@@ -58,34 +58,29 @@ project "Hazel"
 
 	filter "system:windows"
 		cppdialect"C++17"
-		staticruntime "Off"
 		systemversion "latest"
-		
+
 		defines{
 			"HZ_PLATFORM_WINDOWS",
-			"HZ_BUILD_DLL",
 			"GLFW_INCLUDE_NONE",
+			"IMGUI_IMPL_OPENGL_LOADER_CUSTOM",
+			"_CRT_SECURE_NO_WARNINGS",
 			"_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING"
 		}
 
-		postbuildcommands
-		{
-			("{COPY} %{cfg.buildtarget.relpath} ../bin/" .. outputdir .. "/Sandbox")
-		}
-
 		filter "configurations:Debug"
-			defines "HZ_DEBUG"
-			buildoptions "/MDd"
+			defines { "HZ_DEBUG", "HZ_ENABLE_ASSERTS" }
+			runtime "Debug"
 			symbols "On"
 
 		filter "configurations:Release"
 			defines "HZ_RELEASE"
-			buildoptions "/MD"
+			runtime "Release"
 			optimize "On"
 
 		filter "configurations:Dist"
 			defines "HZ_DIST"
-			buildoptions "/MD"
+			runtime "Release"
 			optimize "On"
 
 
@@ -108,36 +103,44 @@ project "Sandbox"
 	includedirs
 	{
 		"Hazel/vendor/spdlog/include",
-		"Hazel/src"
+		"Hazel/src",
+		"%{IncludeDir.GLFW}",
+		"%{IncludeDir.Glad}",
+		"%{IncludeDir.ImGui}",
+		"%{IncludeDir.glm}"
 	}
 
 	links
 	{
-		"Hazel"
+		"Hazel",
+		"GLFW",
+		"GLAD",
+		"ImGui",
+		"opengl32.lib"
 	}
 
 	filter "system:windows"
 		cppdialect "C++17"
-		staticruntime "Off"
 		systemversion "latest"
 
 		defines
 		{
 			"HZ_PLATFORM_WINDOWS",
+			"GLFW_INCLUDE_NONE",
 			"_SILENCE_STDEXT_ARR_ITERS_DEPRECATION_WARNING"
-		}	
+		}
 
 		filter "configurations:Debug"
-			defines "HZ_DEBUG"
-			buildoptions "/MDd"
+			defines { "HZ_DEBUG", "HZ_ENABLE_ASSERTS" }
+			runtime "Debug"
 			symbols "On"
 
-		filter "configurations:Release"	
+		filter "configurations:Release"
 			defines "HZ_RELEASE"
-			buildoptions "/MD"			
+			runtime "Release"
 			symbols "On"
 
 		filter "configurations:Dist"
 			defines "HZ_DIST"
-			buildoptions "/MD"	
+			runtime "Release"
 			symbols "On"
